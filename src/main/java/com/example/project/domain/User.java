@@ -1,9 +1,15 @@
 package com.example.project.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -13,16 +19,37 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "login cannot be empty")
+    @Length(min = 2, max = 30, message = "must be 2-30 characters")
     private String login;
+
+    @NotEmpty(message = "email cannot be empty")
+    @Email(message = "invalid")
     private String email;
+
+    @NotBlank(message = "password cannot be empty")
     private String password;
+
+/*    @Transient
+    @NotBlank(message = "password confirmation cannot be empty")
+    private String password2;*/
+
     private String name;
+
+    @Min(value = 0, message = "error")
     private int age;
+
     private String city;
+
+    @Length(max = 2048, message = "too long")
     private String description;
+
     private String link;
+
     private boolean wantToBeAdded;
+
     private boolean wannaAdd;
+
     private boolean active;
     private String activationCode;
 
@@ -58,9 +85,10 @@ public class User implements UserDetails {
         this.link = link;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
+
     public Long getId() {
         return id;
     }
@@ -204,4 +232,12 @@ public class User implements UserDetails {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+
+ /*   public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }*/
 }

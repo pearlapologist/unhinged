@@ -9,21 +9,45 @@
 </head>
 <body>
 <div th:replace="parts/havbar.html :: navbar" class="container mt-5"></div>
-<div>
-    <form action="/main" method="get">
-        <input type="text" name="filter" th:value="${filter}">
-        <button type="submit">Найти</button>
-    </form>
-</div>
 
-<div th:each="user : ${users}">
-    <p th:text="${user.getId() + ', ' + user.getName() + ', ' + user.getAge() + ', '  + user.getCity()}">user</p>
-</div>
+<div class="card mb-3" style="max-width: 1200px; border: none; margin-top: 20px; margin-left: 1%;">
+    <div class="row g-0">
+        <div class="col-mb-4 col-xs-1">
+            <div class="card-body text-center">
+                <img class="img-fluid rounded" alt="..."
+                     src="https://sun9-1.userapi.com/impg/tW2t8WT9_ALKrVJyko_f9MMihiz_EwsI2d5wug/SDoeR9XwYQM.jpg?size=500x500&quality=96&sign=180c43f3035134a0e8219a24d963adb1&type=album">
+                 <div class="d-flex justify-content-center mb-4">
+                    <a href="#" type="button" class="btn btn-outline-primary ms-1">Yes</a>
+                     <a href="#" type="button" class="btn btn-outline-primary ms-1">no</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body" style="padding-left: 30px;">
+                <h5 class="card-title" style="font-weight: 700; font-size: 32px;">Алишер, 20</h5>
+                <p class="card-text" style="margin-bottom: 5px;"><small class="text-muted">О себе</small></p>
+                <p class="card-text" style="margin-bottom: 10px; font-weight: 300;">Учусь, смотрю сериалы, нравится за рулём ездить, люблю кушать, смотрю аниме и боевики в основном</p>
+                <div class="dividerDivider" style="border-bottom: 1px solid rgb(217, 217, 217); margin-bottom: 10px;"></div>
+                <p class="card-text" style="margin-bottom: 10px;"><small class="text-muted">Личное</small></p>
+                <div class="lichnoe" style="display: flex;">
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">♈ Овен</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">💍 Свободен</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">🔎 Серьёзные отношения</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">📏 191 см</div>
+                </div>
+                <div class="lichnoe" style="display: flex;">
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">🥂 Редко</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">🚬 Не курю</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">🤸 Держу форму</div>
+                </div>
+                <div class="lichnoe" style="display: flex;">
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">🐾 Никаких животных</div>
+                    <div class="statusLichnoe" style="border-radius: 50px; background-color: rgb(228, 228, 228); font-weight: 600; font-size: 14px; color: rgb(59, 59, 59); display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 5px; margin-right: 10px; padding-left: 10px; padding-right: 10px; padding-top: 3px; padding-bottom: 3px;">👶 Нет детей, но хочу</div>
+                </div>
 
-<div th:each="photo : ${photos}">
-<!--    <img th:src="@{/img/{filename}(filename=${photo.getFilename()})}">-->
-    <img th:src="@{'/img/'+${photo.filename}}">
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>

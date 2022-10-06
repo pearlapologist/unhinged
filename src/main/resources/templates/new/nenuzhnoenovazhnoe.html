@@ -8,5 +8,20 @@
 <div>
     <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 </div>
+<div>
+    <form action="/main" method="get">
+        <input type="text" name="filter" th:value="${filter}">
+        <button type="submit">Найти</button>
+    </form>
+</div>
+<div th:each="user : ${users}">
+    <p th:text="${user.getId() + ', ' + user.getName() + ', ' + user.getAge() + ', '  + user.getCity()}">user</p>
+</div>
+
+<div th:each="photo : ${photos}">
+    <!--    <img th:src="@{/img/{filename}(filename=${photo.getFilename()})}">-->
+    <img th:src="@{'/img/'+${photo.filename}}">
+</div>
+
 </body>
 </html>

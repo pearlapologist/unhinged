@@ -6,6 +6,7 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/user}" th:object="${user}">
+    <div class="invalid-feedback" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">error name</div>
     <label for="login">Enter login:</label>
     <input type="text" th:field="*{login}" id="login">
     <br/>
@@ -42,8 +43,6 @@
     </th:block>
     <br/>
     <input type="number" th:field="*{id}" name="id">
-    <br/>
-    <span><a href="/user/addPhoto">addPhoto</a></span>
     <button type="submit">Save</button>
 </form>
 </body>

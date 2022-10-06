@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/user/savePhoto}" th:object="${photo}" enctype="multipart/form-data">
+<form th:method="POST" th:action="@{/myProfile/savePhoto}" th:object="${photo}" enctype="multipart/form-data">
     <div class="custom-file">
         <label class="custom-file-label" for="file">Choose file</label>
         <input type="file" id="file" name="file" class="custom-file-input">
     </div>
-    <input type="number" th:field="*{userId}" name="userId">
+    <input type="hidden" th:field="*{userId}" name="userId">
     <br/>
     <button type="submit">Save</button>
 </form>
