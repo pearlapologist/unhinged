@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,6 +27,11 @@ public class UserService implements UserDetailsService {
         return userRepo.findByLogin(username);
     }
 
+    public User loadUserById(Long id) {
+        User userFromDb = userRepo.findUserById(id);
+        return userFromDb;
+    }
+
     public boolean addUser(User user) {
         User userFromDb = userRepo.findByLogin(user.getLogin());
         if (userFromDb != null) {
@@ -37,6 +43,11 @@ public class UserService implements UserDetailsService {
 
         userRepo.save(user);
 
+        sendMessageToEmail(user);
+        return true;
+    }
+
+    private void sendMessageToEmail(User user) {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
@@ -45,9 +56,7 @@ public class UserService implements UserDetailsService {
                     user.getActivationCode()
             );
             mailSenderService.send(user.getEmail(), "Activation code for unhinged", message);
-
         }
-        return true;
     }
 
     public boolean activateUser(String code) {
@@ -57,8 +66,27 @@ public class UserService implements UserDetailsService {
         }
         user.setActive(true);
         user.setActivationCode(null);
-       userRepo.save(user);
+        userRepo.save(user);
 
         return true;
+    }
+
+    public Iterable<User> findAll() {
+        return userRepo.findAll();
+    }
+
+    public void saveUser(User user) {
+        userRepo.save(user);
+    }
+
+    public void updateUser(User user, User newUser) {
+        boolean isEmailChanged = (!user.getEmail().equals(newUser.getEmail()) && newUser.getEmail() != null);
+        if (isEmailChanged) {
+            if (!StringUtils.isEmpty(newUser.getEmail())) {
+                newUser.setActivationCode(UUID.randomUUID().toString());
+                sendMessageToEmail(newUser);
+            }
+        }
+        userRepo.save(newUser);
     }
 }

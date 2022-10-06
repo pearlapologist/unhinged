@@ -26,7 +26,10 @@
             </li>
             </div>
         </ul>
-        <div class="navbar-text mr-3" sec:authentication="name"></div>
+        <div class="navbar-text mr-3">
+            <a href="/myProfile" class="nav-link"
+            sec:authentication="name">user</a>
+        </div>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-primary">Sign Out</button>
         </form>

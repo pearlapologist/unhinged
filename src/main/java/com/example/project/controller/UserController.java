@@ -4,7 +4,7 @@ import com.example.project.domain.Photo;
 import com.example.project.domain.Role;
 import com.example.project.domain.User;
 import com.example.project.repos.PhotoRepo;
-import com.example.project.repos.UserRepo;
+import com.example.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,21 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
     @Autowired
     private PhotoRepo photoRepo;
     @Value("${upload.path}")
@@ -36,13 +31,14 @@ public class UserController {
 
     @GetMapping
     public String userList(Model model){
-        model.addAttribute("users", userRepo.findAll());
+        model.addAttribute("users", userService.findAll());
         return "userList";
     }
     @GetMapping("{id}")
     public String userEditForm(@PathVariable Long id, Model model){
      //   model.addAttribute("existingUser", id);
-        User userFromDb = userRepo.findUserById(id);
+        User userFromDb = userService.loadUserById(id);
+
         model.addAttribute("user", userFromDb);
         model.addAttribute("roles", Role.values());
         return "userEdit";
@@ -50,7 +46,8 @@ public class UserController {
 
     @PostMapping
     public String userSave(@ModelAttribute("user") User user){
-        userRepo.save(user);
+        userService.saveUser(user);
+
         return "redirect:/user";
     }
 
