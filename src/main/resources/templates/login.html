@@ -13,7 +13,9 @@
     You have been logged out.
 </div>
 <div th:if="${message}" >
-    <p th:text="${message}" style="color: #fc7925"></p>
+     <div th:class="'alert alert-'+${messageType}" role="alert">
+        <p th:text="${message}"></p>
+    </div>
 </div>
 <form th:action="@{/login}" method="post">
     <div class="form-group row">

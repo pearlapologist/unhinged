@@ -27,19 +27,12 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "")String filter,
-                       Model model, @ModelAttribute("user") User user) {
-        Iterable<User> users;
-
-        if (filter != null && !filter.isEmpty()) {
-            users = userRepo.findByCity(filter);
-        } else {
-            users = userRepo.findAll();
-        }
-        Iterable<Photo> photos = photoRepo.findAll();
-        model.addAttribute("users", users);
-        model.addAttribute("photos", photos);
-        model.addAttribute("filter", filter);
+    public String main(@RequestParam(value = "page", required = false, defaultValue = "0")Integer page,
+                       Model model) {
+        Page<User> pageUsers = userRepo.findAll(PageRequest.of(page,1, Sort.Direction.ASC,"id"));
+        model.addAttribute("usersPage", pageUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("numbers", IntStream.range(0,pageUsers.getTotalPages()).toArray());
         return "main";
     }
 
