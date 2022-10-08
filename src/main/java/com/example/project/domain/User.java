@@ -30,10 +30,6 @@ public class User implements UserDetails {
     @NotBlank(message = "password cannot be empty")
     private String password;
 
-/*    @Transient
-    @NotBlank(message = "password confirmation cannot be empty")
-    private String password2;*/
-
     private String name;
 
     @Min(value = 0, message = "error")
@@ -48,10 +44,14 @@ public class User implements UserDetails {
 
     private boolean wantToBeAdded;
 
+
     private boolean wannaAdd;
+     /* @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Redflag> redflags;*/
 
     private boolean active;
     private String activationCode;
+
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -233,7 +233,15 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
- /*   public String getPassword2() {
+/*    public Set<Redflag> getRedflags() {
+        return redflags;
+    }
+
+    public void setRedflags(Set<Redflag> redflags) {
+        this.redflags = redflags;
+    }*/
+
+    /*   public String getPassword2() {
         return password2;
     }
 

@@ -2,9 +2,9 @@ body {
     font-family: Arial;
 }
 
-.lichnoe.statusLichnoe {
+.statusLichnoe {
     border-radius: 50px;
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(243, 72, 91);
     font-weight: 600;
     font-size: 14px;
     color: rgb(59, 59, 59);
