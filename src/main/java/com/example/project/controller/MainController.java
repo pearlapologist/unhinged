@@ -69,7 +69,7 @@ public class MainController {
     ) {
         Matches matches = new Matches(principal.getId(), user.getId());
         if (matchesService.doWeMatch(matches)) {
-            return "profile"+"/" + user.getId();
+            return "redirect:"+ "/profile"+"/" + user.getId();
         } else {
             if (!matchesService.addLike(matches)) {
                 model.addAttribute("message", "You already liked this person");
