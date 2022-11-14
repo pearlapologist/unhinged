@@ -12,3 +12,8 @@ spring.mail.password=
 spring.mail.port=
 spring.mail.protocol=
 mail.debug=
+spring.mail.properties.mail.debug=
+spring.jpa.show-sql=
+
+spring.session.jdbc.initialize-schema=
+spring.session.jdbc.table-name=
