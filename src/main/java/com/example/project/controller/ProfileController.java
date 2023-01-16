@@ -41,6 +41,8 @@ public class ProfileController {
         List<Redflag> redflagList = redflagRepo.findRedflagsByUserid(principal.getId());
         model.addAttribute("redflags", redflagList);
         model.addAttribute("user", user);
+        List<Photo> photos = photoRepo.findPhotosByUserId(user.getId());
+            model.addAttribute("photos", photos);
         return "myProfile";
     }
 
@@ -51,6 +53,8 @@ public class ProfileController {
         model.addAttribute("redflags", redflagList);
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
+        List<Photo> photos = photoRepo.findPhotosByUserId(user.getId());
+        model.addAttribute("photos", photos);
         return "editMyProfile";
     }
 

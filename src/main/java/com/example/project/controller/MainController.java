@@ -48,14 +48,17 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
-                       @AuthenticationPrincipal User principal,
                        Model model) {
         Page<User> pageUsers = userRepo.findAll(PageRequest.of(page, 1, Sort.Direction.ASC, "id"));
 
-        List<Redflag> redflagList = redflagRepo.findRedflagsByUserid(principal.getId());
+        User user = pageUsers.getContent().get(0);
+        List<Redflag> redflagList = redflagRepo.findRedflagsByUserid(user.getId());
+        List<Photo> photos = photoRepo.findPhotosByUserId(user.getId());
+
         model.addAttribute("redflags", redflagList);
         model.addAttribute("usersPage", pageUsers);
         model.addAttribute("currentPage", page);
+        model.addAttribute("photos", photos);
         return "main";
     }
 

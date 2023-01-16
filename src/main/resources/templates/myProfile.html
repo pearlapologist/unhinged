@@ -17,9 +17,14 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="https://sun9-1.userapi.com/impg/tW2t8WT9_ALKrVJyko_f9MMihiz_EwsI2d5wug/SDoeR9XwYQM.jpg?size=500x500&quality=96&sign=180c43f3035134a0e8219a24d963adb1&type=album"
-                             alt="avatar"
-                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <div th:if="${photos!=null and !photos.isEmpty()}">
+                            <img th:src="@{/img/{filename}(filename=${photos.get(0).getFilename()})}" alt="avatar"
+                                 class="rounded-circle img-fluid" style="width: 350px; height: 350px;">
+                        </div>
+                        <div th:unless="${photos!=null and !photos.isEmpty()}">
+                            <img src="https://i.imgflip.com/6415yq.jpg" alt="avatar"
+                                 class="rounded-circle img-fluid" style="width: 350px; height: 350px;">
+                        </div>
                         <h5 class="my-3" th:text="${user.getLogin() + ', ' + user.getAge()}">John Smith</h5>
                         <div class="d-flex justify-content-center mb-4">
                             <a href="/myProfile/edit" type="button" class="btn btn-outline-primary ms-1">Редактировать</a>

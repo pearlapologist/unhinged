@@ -37,5 +37,23 @@ public class Nenuzhnoe {
         model.addAttribute("currentPage", page);
         model.addAttribute("numbers", IntStream.range(0,pageUsers.getTotalPages()).toArray());
         return "master";
-    }*/
+    }
+
+        @GetMapping("/main")
+    public String main(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                       @AuthenticationPrincipal User principal,
+                       Model model) {
+        Page<User> pageUsers = userRepo.findAll(PageRequest.of(page, 1, Sort.Direction.ASC, "id"));
+
+        User user = pageUsers.getContent().get(0);
+        List<Redflag> redflagList = redflagRepo.findRedflagsByUserid(user.getId());
+        List<Photo> photos = photoRepo.findPhotosByUserId(user.getId());
+
+        model.addAttribute("redflags", redflagList);
+        model.addAttribute("usersPage", pageUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("photos", photos);
+        return "main";
+    }
+    */
 }

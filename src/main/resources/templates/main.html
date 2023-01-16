@@ -19,8 +19,14 @@
     <div class="row g-0" th:each="user:${usersPage.content}">
         <div class="col-mb-4 col-xs-1">
             <div class="card-body text-center">
-                <img class="img-fluid rounded" alt="..."
-                     src="https://sun9-1.userapi.com/impg/tW2t8WT9_ALKrVJyko_f9MMihiz_EwsI2d5wug/SDoeR9XwYQM.jpg?size=500x500&quality=96&sign=180c43f3035134a0e8219a24d963adb1&type=album">
+                <div th:if="${photos!=null and !photos.isEmpty()}">
+                    <img th:src="@{/img/{filename}(filename=${photos.get(0).getFilename()})}" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 350px; height: 350px; ">
+                </div>
+                <div th:unless="${photos!=null and !photos.isEmpty()}">
+                    <img src="https://i.imgflip.com/6415yq.jpg" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 350px; height: 350px;">
+                </div>
                 <div class="d-flex justify-content-center mb-4 card-footer text-muted container">
                     <ul class="pagination row">
                         <div th:if="${message}" class="col">
@@ -50,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
